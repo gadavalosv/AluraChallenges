@@ -1,14 +1,14 @@
 package com.gadv.medvoll.api.model.doctor;
 
-import com.gadv.medvoll.api.model.address.AddressData;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-public record DoctorRegisterData(
-        @NotBlank //includes @NotNull
+public record DoctorListData(
+        @NotNull
+        Long id,
+        @NotBlank
         String name,
         @NotBlank
         @Email
@@ -16,12 +16,10 @@ public record DoctorRegisterData(
         @NotBlank
         @Pattern(regexp = "\\d{4,6}") //número de 4 a 6 digitos
         String document,
-        @NotBlank
-        String phone,
         @NotNull
-        Specialty specialty,
-        @NotNull
-        @Valid
-        AddressData address
+        Specialty specialty
 ) {
+    public DoctorListData(Doctor doctor) {
+        this(doctor.getId(), doctor.getName(), doctor.getEmail(), doctor.getDocument(), doctor.getSpecialty());
+    }
 }
