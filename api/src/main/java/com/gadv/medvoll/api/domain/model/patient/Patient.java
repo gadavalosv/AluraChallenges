@@ -1,6 +1,6 @@
-package com.gadv.medvoll.api.model.patient;
+package com.gadv.medvoll.api.domain.model.patient;
 
-import com.gadv.medvoll.api.model.address.Address;
+import com.gadv.medvoll.api.domain.model.address.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -48,6 +48,10 @@ public class Patient {
     public String getIdentityDocument(){
         return this.identityDocument;
     }
+
+    public String getPhone() { return phone; }
+
+    public Address getAddress() { return address; }
 
     public void updateData(PatientUpdateData patientUpdateData) {
         this.name = (patientUpdateData.name() != null && !patientUpdateData.name().isEmpty()) ? patientUpdateData.name(): this.name;

@@ -1,4 +1,4 @@
-package com.gadv.medvoll.api.model.patient;
+package com.gadv.medvoll.api.domain.model.patient;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

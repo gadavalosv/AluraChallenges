@@ -1,11 +1,8 @@
-package com.gadv.medvoll.api.model.doctor;
+package com.gadv.medvoll.api.domain.model.doctor;
 
-import com.gadv.medvoll.api.model.address.AddressData;
+import com.gadv.medvoll.api.domain.model.address.AddressData;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 public record DoctorUpdateData(
         @NotNull

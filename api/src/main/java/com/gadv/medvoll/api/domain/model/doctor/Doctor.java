@@ -1,7 +1,7 @@
-package com.gadv.medvoll.api.model.doctor;
+package com.gadv.medvoll.api.domain.model.doctor;
 
 
-import com.gadv.medvoll.api.model.address.Address;
+import com.gadv.medvoll.api.domain.model.address.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -58,6 +58,10 @@ public class Doctor {
     public Specialty getSpecialty() {
         return specialty;
     }
+
+    public String getPhone() { return phone; }
+
+    public Address getAddress() { return address; }
 
     public void updateData(DoctorUpdateData doctorUpdateData) {
         this.name = (doctorUpdateData.name() != null && !doctorUpdateData.name().isEmpty()) ? doctorUpdateData.name() : this.name;

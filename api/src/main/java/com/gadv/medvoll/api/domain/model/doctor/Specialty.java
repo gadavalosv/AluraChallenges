@@ -1,4 +1,4 @@
-package com.gadv.medvoll.api.model.doctor;
+package com.gadv.medvoll.api.domain.model.doctor;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

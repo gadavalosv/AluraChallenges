@@ -1,4 +1,4 @@
-package com.gadv.medvoll.api.model.address;
+package com.gadv.medvoll.api.domain.model.address;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -31,5 +31,25 @@ public class Address {
         this.number = address.number();
         this.complement = address.complement();
         return this;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public String getComplement() {
+        return complement;
     }
 }

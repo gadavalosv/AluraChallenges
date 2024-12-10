@@ -1,6 +1,6 @@
-package com.gadv.medvoll.api.model.patient;
+package com.gadv.medvoll.api.domain.model.patient;
 
-import com.gadv.medvoll.api.model.address.AddressData;
+import com.gadv.medvoll.api.domain.model.address.AddressData;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
