@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "doctors")
 @Entity(name = "Doctor")
 //LOMBOK to generate code without writing:
+//IN ORDER TO WORK INSTALL LOMBOK PLUGIN & ENABLE ANNOTATION PROCESSING
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,33 +40,9 @@ public class Doctor {
         this.active = true;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getDocument() {
-        return document;
-    }
-
-    public Specialty getSpecialty() {
-        return specialty;
-    }
-
-    public String getPhone() { return phone; }
-
-    public Address getAddress() { return address; }
-
     public void updateData(DoctorUpdateData doctorUpdateData) {
         this.name = (doctorUpdateData.name() != null && !doctorUpdateData.name().isEmpty()) ? doctorUpdateData.name() : this.name;
-        this.phone = (doctorUpdateData.phone() != null && !doctorUpdateData.name().isEmpty()) ? doctorUpdateData.phone() : this.phone;
+        this.phone = (doctorUpdateData.phone() != null && !doctorUpdateData.phone().isEmpty()) ? doctorUpdateData.phone() : this.phone;
         this.address = (doctorUpdateData.address()!= null) ? address.updateData(doctorUpdateData.address()) : this.address;
     }
 

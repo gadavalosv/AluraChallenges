@@ -33,26 +33,6 @@ public class Patient {
         this.active = true;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getEmail(){
-        return this.email;
-    }
-
-    public String getIdentityDocument(){
-        return this.identityDocument;
-    }
-
-    public String getPhone() { return phone; }
-
-    public Address getAddress() { return address; }
-
     public void updateData(PatientUpdateData patientUpdateData) {
         this.name = (patientUpdateData.name() != null && !patientUpdateData.name().isEmpty()) ? patientUpdateData.name(): this.name;
         this.phone = (patientUpdateData.phone() != null && !patientUpdateData.phone().isEmpty()) ? patientUpdateData.phone(): this.phone;
