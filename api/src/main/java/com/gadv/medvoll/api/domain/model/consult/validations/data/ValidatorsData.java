@@ -1,4 +1,4 @@
-package com.gadv.medvoll.api.domain.model.consult.validations;
+package com.gadv.medvoll.api.domain.model.consult.validations.data;
 
 import lombok.Getter;
 

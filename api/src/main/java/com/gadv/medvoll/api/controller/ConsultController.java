@@ -4,6 +4,7 @@ import com.gadv.medvoll.api.domain.model.consult.ConsultCancelData;
 import com.gadv.medvoll.api.domain.model.consult.ConsultDetailData;
 import com.gadv.medvoll.api.domain.model.consult.ConsultReservation;
 import com.gadv.medvoll.api.domain.model.consult.ConsultReserveData;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("consults")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultController {
     @Autowired
     private ConsultReservation consultReservation;
@@ -19,8 +21,8 @@ public class ConsultController {
     @PostMapping
     @Transactional
     public ResponseEntity<ConsultDetailData> reserveConsult(@RequestBody @Valid ConsultReserveData consultReserveData){
-        consultReservation.reserve(consultReserveData);
-        return ResponseEntity.ok(new ConsultDetailData(null, null, null, null));
+        var consultDetailData = consultReservation.reserve(consultReserveData);
+        return ResponseEntity.ok(consultDetailData);
     }
 
     @DeleteMapping

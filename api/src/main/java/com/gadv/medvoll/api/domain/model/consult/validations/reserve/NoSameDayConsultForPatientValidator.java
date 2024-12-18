@@ -1,7 +1,8 @@
-package com.gadv.medvoll.api.domain.model.consult.validations;
+package com.gadv.medvoll.api.domain.model.consult.validations.reserve;
 
 import com.gadv.medvoll.api.domain.MedvollValidationException;
 import com.gadv.medvoll.api.domain.model.consult.ConsultReserveData;
+import com.gadv.medvoll.api.domain.model.consult.validations.data.ValidatorsData;
 import com.gadv.medvoll.api.repository.ConsultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ public class NoSameDayConsultForPatientValidator implements ConsultValidator {
             consultDurationInHours = ValidatorsData.getConsultDurationInHours(),
             timeClinicOpens = ValidatorsData.getTimeClinicOpens(),
             timeClinicCloses = ValidatorsData.getTimeClinicCloses();
-    @Autowired
+
     public void validate(ConsultReserveData consultReserveData){
         LocalDateTime firstSchedule = consultReserveData.consultDate().withHour(timeClinicOpens);
         LocalDateTime lastSChedule = consultReserveData.consultDate().withHour(timeClinicCloses - consultDurationInHours);

@@ -1,5 +1,6 @@
 package com.gadv.medvoll.api.infrastructure.errors;
 
+import com.gadv.medvoll.api.domain.MedvollValidationException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -15,10 +16,16 @@ public class ErrorHandler {
     public ResponseEntity handleError404(){
         return ResponseEntity.notFound().build();
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity handleError400(MethodArgumentNotValidException e){
         var errors = e.getFieldErrors().stream().map(ValidationErrorData::new).collect(Collectors.toList());
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(MedvollValidationException.class)
+    public ResponseEntity handleValidationError(MedvollValidationException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
     private record ValidationErrorData(String field, String error){

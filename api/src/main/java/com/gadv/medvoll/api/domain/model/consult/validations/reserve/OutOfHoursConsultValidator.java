@@ -1,7 +1,8 @@
-package com.gadv.medvoll.api.domain.model.consult.validations;
+package com.gadv.medvoll.api.domain.model.consult.validations.reserve;
 
 import com.gadv.medvoll.api.domain.MedvollValidationException;
 import com.gadv.medvoll.api.domain.model.consult.ConsultReserveData;
+import com.gadv.medvoll.api.domain.model.consult.validations.data.ValidatorsData;
 import org.springframework.stereotype.Component;
 
 import java.time.DayOfWeek;

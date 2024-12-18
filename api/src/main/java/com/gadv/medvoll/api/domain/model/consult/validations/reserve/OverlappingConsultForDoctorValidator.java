@@ -1,4 +1,4 @@
-package com.gadv.medvoll.api.domain.model.consult.validations;
+package com.gadv.medvoll.api.domain.model.consult.validations.reserve;
 
 import com.gadv.medvoll.api.domain.MedvollValidationException;
 import com.gadv.medvoll.api.domain.model.consult.ConsultReserveData;
@@ -11,7 +11,7 @@ public class OverlappingConsultForDoctorValidator implements ConsultValidator {
     @Autowired
     private ConsultRepository consultRepository;
     public void validate(ConsultReserveData consultReserveData){
-        boolean doctorHasAnotherConsult = consultRepository.existsByDoctorIdAndConsultDate(
+        boolean doctorHasAnotherConsult = consultRepository.existsByDoctorIdAndConsultDateAndCancelReasonIsNull(
                 consultReserveData.idDoctor(), consultReserveData.consultDate());
 
         if (doctorHasAnotherConsult) {

@@ -3,6 +3,7 @@ package com.gadv.medvoll.api.controller;
 import com.gadv.medvoll.api.domain.model.address.AddressData;
 import com.gadv.medvoll.api.domain.model.doctor.*;
 import com.gadv.medvoll.api.repository.DoctorRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/doctors")
+@SecurityRequirement(name = "bearer-key")
 public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;

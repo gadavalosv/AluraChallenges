@@ -1,9 +1,9 @@
 package com.gadv.medvoll.api.domain.model.consult;
 
 import com.gadv.medvoll.api.domain.MedvollValidationException;
-import com.gadv.medvoll.api.domain.model.consult.validations.ConsultValidator;
+import com.gadv.medvoll.api.domain.model.consult.validations.cancel.CancelConsultValidator;
+import com.gadv.medvoll.api.domain.model.consult.validations.reserve.ConsultValidator;
 import com.gadv.medvoll.api.domain.model.doctor.Doctor;
-import com.gadv.medvoll.api.domain.model.patient.Patient;
 import com.gadv.medvoll.api.repository.ConsultRepository;
 import com.gadv.medvoll.api.repository.DoctorRepository;
 import com.gadv.medvoll.api.repository.PatientRepository;
@@ -22,22 +22,29 @@ public class ConsultReservation {
     private ConsultRepository consultRepository;
 
     @Autowired //llena la lista de todas la clases que implementan la interfaz ConsultValidator
-    private List<ConsultValidator> validators;
+    private List<ConsultValidator> consultValidators;
+    @Autowired
+    private List<CancelConsultValidator> cancelConsultValidators;
 
-    public void reserve(ConsultReserveData consultReserveData){
+    public ConsultDetailData reserve(ConsultReserveData consultReserveData){
         if(!patientRepository.existsById(consultReserveData.idPatient())){
             throw new MedvollValidationException("No existe un paciente con el id proporcionado");
         }
         if(consultReserveData.idDoctor() != null && !doctorRepository.existsById(consultReserveData.idDoctor())){
             throw new MedvollValidationException("No existe un Doctor con el id proporcionado");
         }
+
         //validate
-        validators.forEach(consultValidator -> consultValidator.validate(consultReserveData));
+        consultValidators.forEach(consultValidator -> consultValidator.validate(consultReserveData));
 
         var doctor = asignDoctor(consultReserveData);//doctorRepository.findById(consultReserveData.idDoctor()).get();//.getReferenceById(consultReserveData.idDoctor());
+        if(doctor == null){
+            throw new MedvollValidationException("No existe un Doctor disponible en ese horario");
+        }
         var patient = patientRepository.findById(consultReserveData.idPatient()).get();//.getReferenceById(consultReserveData.idPatient());
         var consult = new Consult(null, doctor, patient, consultReserveData.consultDate(), null);
         consultRepository.save(consult);
+        return new ConsultDetailData(consult);
     }
 
     private Doctor asignDoctor(ConsultReserveData consultReserveData) {
@@ -54,6 +61,10 @@ public class ConsultReservation {
         if (!consultRepository.existsById(consultCancelData.consultId())) {
             throw new MedvollValidationException("Id de la consulta proporcionado no existe!");
         }
+
+        //validate
+        cancelConsultValidators.forEach(consultValidator -> consultValidator.validate(consultCancelData));
+
         var consult = consultRepository.getReferenceById(consultCancelData.consultId());
         consult.cancel(consultCancelData.cancelReason());
     }
