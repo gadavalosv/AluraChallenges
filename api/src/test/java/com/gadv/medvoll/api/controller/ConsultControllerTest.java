@@ -59,7 +59,7 @@ class ConsultControllerTest {
         var date = LocalDateTime.now().plusHours(1);
         var specialty = Specialty.CARDIOLOGIA;
         var consultDetailData = new ConsultDetailData(null, 2l, 2l, date);
-        var consultReserveData = new ConsultReserveData(2l, 4l, date, specialty);
+        var consultReserveData = new ConsultReserveData(2l, 2l, date, specialty);
         when(consultReservation.reserve(any(ConsultReserveData.class))).thenReturn(consultDetailData);
         var response = mockMvc.perform(post("/consults")
                         .contentType(MediaType.APPLICATION_JSON)
